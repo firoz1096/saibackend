@@ -14,14 +14,16 @@ const transporter = nodemailer.createTransport({
 // Fetch contact info (for GET request)
 const getContactInfo = async (req, res) => {
   try {
+    const dbCheck = await pool.query("SELECT current_database()");
+    console.log("🟢 Connected DB:", dbCheck.rows[0].current_database);
+
     const result = await pool.query("SELECT * FROM contact LIMIT 1");
     res.json(result.rows[0]);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Database error" });
+    console.error("❌ DB ERROR:", err);
+    res.status(500).json({ error: err.message });
   }
 };
-
 // Save contact enquiry and send email 5–6 second delay 
 // const createContactEnquiry = async (req, res) => {
 //   const { name, phone, email, message } = req.body;
