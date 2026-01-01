@@ -115,7 +115,7 @@ app.use((err, req, res, next) => {
 // app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
 const PORT = process.env.PORT;
-
+console.log("PORT FROM ENV =", process.env.PORT);
 app.get("/", (req, res) => {
   res.status(200).send("OK");
 });
