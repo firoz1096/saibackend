@@ -115,14 +115,16 @@ app.use((err, req, res, next) => {
 // app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
 
 const PORT = process.env.PORT;
-console.log("PORT FROM ENV =", process.env.PORT);
+
 app.get("/", (req, res) => {
   res.status(200).send("OK");
 });
 
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Server running on port ${PORT}`);
-});
+console.log("🚨 ENV PORT =", process.env.PORT);
+console.log("🚨 ALL ENV KEYS INCLUDE PORT =", Object.keys(process.env).includes("PORT"));
 
+app.listen(process.env.PORT, '0.0.0.0', () => {
+  console.log(`✅ Server running on port ${process.env.PORT}`);
+});
 
